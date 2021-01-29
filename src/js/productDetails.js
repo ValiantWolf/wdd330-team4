@@ -1,4 +1,4 @@
-import { setLocalStorage } from './utils.js';
+import { setLocalStorage, getLocalStorage } from './utils.js';
 
 export default class ProductDetails {
   constructor(productId, dataSource){
@@ -15,8 +15,15 @@ export default class ProductDetails {
             .addEventListener('click', this.addToCart.bind(this));
   }
   addToCart() {
-    
-    setLocalStorage('so-cart', this.product);
+    // uses two functions in the utils.js file to be able to get local data.
+    let cartContents = getLocalStorage('so-cart');
+    // if there isnt already an array it makes one.
+    if(!cartContents) {
+      cartContents = [];
+    };
+    // then it adds it to a list.
+    cartContents.push(this.product);
+    setLocalStorage('so-cart', cartContents);
   }
   renderProductDetails() {
     return `<section class="product-detail"> 
