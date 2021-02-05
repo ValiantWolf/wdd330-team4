@@ -15,15 +15,40 @@ export default class ProductDetails {
             .addEventListener('click', this.addToCart.bind(this));
   }
   addToCart() {
-    // uses two functions in the utils.js file to be able to get local data.
-    let cartContents = getLocalStorage('so-cart');
-    // if there isnt already an array it makes one.
-    if(!cartContents) {
-      cartContents = [];
-    };
-    // then it adds it to a list.
-    cartContents.push(this.product);
-    setLocalStorage('so-cart', cartContents);
+    let existingProductIndex;
+    let cart = getLocalStorage('so-cart');
+    if(!cart){
+         cart = { products: [], totalPrice: 0 };
+    }
+    const existingProduct = cart.products.find(
+      (prod, index) => {
+        if (prod.id === this.productId){
+          existingProductIndex = index;
+          return true;
+      }
+      return false;
+    });
+    let updatedProduct;
+    if (existingProduct) {
+      updatedProduct = { ...existingProduct };
+      updatedProduct.qty = updatedProduct.qty + 1;
+      cart.products = [...cart.products];
+      cart.products[existingProductIndex] = updatedProduct;
+    } else {
+      updatedProduct = { id: this.productId, qty: 1 };
+      cart.products = [...cart.products, updatedProduct];
+    }
+
+    
+    // let total = 0,  //set a variable that holds our total
+    // cartQty = cart.products,
+    // i;
+    // for (i = 0; i < cartQty.length; i++) {  //loop through the array
+    //     total += cartQty[i].qty;  //Do the math!
+    // }
+    // console.log(total);
+   
+    setLocalStorage('so-cart', cart);
   }
   renderProductDetails() {
     return `<section class="product-detail"> 
