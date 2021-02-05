@@ -62,6 +62,10 @@ export async function loadHeaderFooter() {
   renderWithTemplate(footer, footerElement);
 }
 
+export function convertCartToList(key) {
+  console.log(key);
+}
+
 function convertToText(res) {
   if (res.ok) {
     return res.text();
