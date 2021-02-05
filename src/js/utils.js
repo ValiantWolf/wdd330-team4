@@ -27,6 +27,7 @@ export function getParams(param) {
   return product;
 }
 
+//Templates the list (cart items in soCart)
 export function renderListWithTemplate(template, parent, list, callback) {
   list.forEach(item => {
     const clone = template.content.cloneNode(true);
@@ -43,6 +44,7 @@ export function renderWithTemplate(template, parent, data, callback) {
   parent.appendChild(clone);
 }
 
+//template the partial files
 export async function loadTemplate(path) {
   const html = await fetch(path).then(convertToText);
   const template = document.createElement('template');
@@ -50,6 +52,7 @@ export async function loadTemplate(path) {
   return template;
 }
 
+//load the template for the header and footer
 export async function loadHeaderFooter() {
   const header = await loadTemplate('../partials/header.html');
   const footer = await loadTemplate('../partials/footer.html');
