@@ -1,10 +1,10 @@
 import ProductData from './productData.js';
 import ProductList from './productList.js';
-import { loadHeaderFooter, getParam } from './utils.js';
+import { loadHeaderFooter, getParams } from './utils.js';
 
 loadHeaderFooter();
 
-const category = getParam('category');
+const category = getParams('category');
 // first create an instance of our ProductData class.
 const dataSource = new ProductData();
 // then get the element we want the product list to render in
