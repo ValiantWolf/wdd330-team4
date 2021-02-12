@@ -1,8 +1,8 @@
 import { renderListWithTemplate} from './utils';
 
 export default class ProductList {
-    constructor (catagory, dataSource, listElement) {
-        this.catagory = catagory;
+    constructor (category, dataSource, listElement) {
+        this.category = category;
         this.dataSource = dataSource;
         this.listElement = listElement;
     }
