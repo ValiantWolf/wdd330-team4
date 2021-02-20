@@ -18,9 +18,9 @@ export default class ProductDetails {
     let existingProductIndex;
     let cart = getLocalStorage('so-cart');
     if(!cart){
-         cart = { products: [], totalPrice: 0 };
+         cart = { items: [], totalPrice: 0 };
     }
-    const existingProduct = cart.products.find(
+    const existingProduct = cart.items.find(
       (prod, index) => {
         if (prod.id === this.productId){
           existingProductIndex = index;
@@ -32,12 +32,15 @@ export default class ProductDetails {
     if (existingProduct) {
       updatedProduct = { ...existingProduct };
       updatedProduct.qty = updatedProduct.qty + 1;
-      cart.products = [...cart.products];
-      cart.products[existingProductIndex] = updatedProduct;
+      cart.items = [...cart.items];
+      cart.items[existingProductIndex] = updatedProduct;
     } else {
       updatedProduct = { id: this.productId, qty: 1 };
-      cart.products = [...cart.products, updatedProduct];
+      cart.items = [...cart.items, updatedProduct];
     }
+    updatedProduct.name = this.product.Name;
+    updatedProduct.price = this.product.FinalPrice
+    cart.totalPrice += this.product.FinalPrice;
 
     
     // let total = 0,  //set a variable that holds our total
@@ -56,7 +59,7 @@ export default class ProductDetails {
     <h2 class="divider">${this.product.NameWithoutBrand}</h2>
     <img
       class="divider"
-      src="${this.product.Image}"
+      src="${this.product.Images.PrimaryLarge}"
       alt="${this.product.NameWithoutBrand}"
     />
     <p class="product-card__price">$${this.product.FinalPrice}</p>

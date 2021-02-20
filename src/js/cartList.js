@@ -1,6 +1,5 @@
 import { renderListWithTemplate, getLocalStorage } from './utils.js';
 
-
 export default class CartList {
     constructor (key, listElement, dataSource) {
         this.key = key;
@@ -15,11 +14,11 @@ export default class CartList {
     }
       
     prepareTemplate(template, product) {  
-        template.querySelector('.cart-card__image img').src =  product.Image;
+        template.querySelector('.cart-card__image img').src =  product.Images.PrimaryMedium;
         template.querySelector('.cart-card__image img').alt += product.Name;
         template.querySelector('.card__name').textContent = product.Name;
         template.querySelector('.cart-card__color').textContent = product.Colors[0].ColorName;
-        template.querySelector('.cart-card__price').textContent += product.FinalPrice; 
+        template.querySelector('.cart-card__price').textContent += product.FinalPrice;
         return template;
     }
 
@@ -27,7 +26,7 @@ export default class CartList {
         // make sure the list is empty
         this.listElement.innerHTML = '';
         //convert id into json list
-        let newList = list.products;
+        let newList = list.items;
         //takes the ids and makes a new array
         newList = [...new Set(newList.map(itemId => itemId.id).flat())];
         let fakeCart = [];
@@ -35,6 +34,7 @@ export default class CartList {
             this.products = await this.dataSource.findProductById(newList[i]);
             fakeCart.push(this.products)
         }
+        console.log(fakeCart.image);
         //get the template
         const template = document.getElementById('cart-card-template');
         renderListWithTemplate(template, this.listElement, fakeCart, this.prepareTemplate);
