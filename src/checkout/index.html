@@ -14,27 +14,43 @@
         <form class="checkout"action="checkout">
           <fieldset class="shipping">
             <legend>Shipping</legend>
-            <label for="fname">First Name</label>
-            <input type="text" name="fname" id="fname">
-            <label for="lname">Last Name</label>
-            <input type="text" name="lname" id="lname">
-            <label for="street">Street</label>
-            <input type="text" name="street" id="street">
-            <label for="city">City</label>
-            <input type="text" name="city" id="city">
-            <label for="state">State</label>
-            <input type="text" name="state" id="state">
-            <label for="zip">Zip</label>
-            <input type="text" name="zip" id="zip">
+            <div class="checkout__name">
+              <label for="fname">First Name</label>
+              <input name="fname" required />
+              <label for="lname">Last Name</label>
+              <input name="lname" required />
+            </div>
+            <div class="checkout__address">
+              <label for="street">Street</label>
+              <input name="street" required />
+              <label for="city">City</label>
+              <input name="city" required />
+              <label for="state">State</label>
+              <input name="state" required />
+              <label for="zip">Zip</label>
+              <input name="zip" id="zip" required />
+            </div>
           </fieldset>
-          <fieldset class="payment">
+          <fieldset>
             <legend>Payment</legend>
-            <label for="cardNumber">Card Number</label>
-            <input type="text" name="cardNumber" id="cardNumber">
+            <label for="cardNumber">Card number</label>
+            <input
+              name="cardNumber"
+              required
+              placeholder="No spaces or dashes"
+              maxlength="16"
+              minlength="16"
+            />
             <label for="expiration">Expiration</label>
-            <input type="text" name="expiration" id="expiration">
+            <input name="expiration" required placeholder="mm/yy" />
             <label for="code">Security Code</label>
-            <input type="text" name="code" id="code">
+            <input
+              name="code"
+              required
+              placeholder="xxx"
+              maxlength="3"
+              minlength="3"
+            />
           </fieldset>
           <fieldset class="checkout-summary">
             <legend>Order Summary</legend>
